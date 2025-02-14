@@ -1,0 +1,39 @@
+[project]
+name = "ipc-utils"
+dynamic = ["version"]
+description = "Cross-platform utils for IPC (inter-processing communication) in Python"
+readme = "README.md"
+authors = [
+    { name = "monchin", email = "pazzinter@126.com" }
+]
+requires-python = ">=3.8"
+dependencies = [
+    "pywin32>=308 ; sys_platform == 'win32'",
+]
+license = {text = "MIT"}
+keywords = ["IPC", "cross-platform"]
+classifiers = [
+    "Topic :: IPC",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+]
+
+[project.urls]
+Homepage = "https://github.com/monchin/ipc-utils"
+Repository = "https://github.com/monchin/ipc-utils"
+
+
+[build-system]
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
+
+[tool.pdm]
+version = { source = "file", path = "src/ipc_utils/__init__.py" }
+
+[tool.pdm.scripts]
+fmt = {composite=["ruff check --select I --fix .", "ruff format ."]}
