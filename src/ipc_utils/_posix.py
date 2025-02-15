@@ -29,7 +29,7 @@ class Semaphore(BaseSemaphore):
                 self._name.encode("utf-8"), os.O_RDWR, mode, init_val
             )
 
-        if self._sem == None:
+        if self._sem is None:
             raise OSError(
                 ctypes.get_errno(),
                 f"Failed to {'create' if create else 'open'} named semaphore '{self._name}'",
