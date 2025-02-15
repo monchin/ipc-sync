@@ -2,12 +2,12 @@ __version__ = "0.0.1"
 
 from ._env import SYS
 
-if SYS == "Windows":
+if SYS == "nt":
     from ._win import AccessRight, Mutex, Semaphore
-else:
-    raise NotImplementedError("Only Windows is supported")
+elif SYS == "posix":
+    from ._posix import Mutex, Semaphore
 
 __all__ = ["Mutex", "Semaphore"]
 
-if SYS == "Windows":
+if SYS == "nt":
     __all__ += ["AccessRight"]
