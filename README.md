@@ -1,2 +1,26 @@
 # ipc-utils
 Cross-platform utils for IPC (inter-processing communication) in Python
+
+You can create a named IPC tool like semaphore or mutex here. Onced you created here, you can use it everywhere in your computer. You can also just open a named IPC tool and use it if it has been created somewhere else before.
+## Usage
+### Semaphore
+A named semaphore is offered.
+```python
+from ipc_utils import Semaphore
+
+sem = Semaphore("/test", create = True, init_val = 1)
+## or if it has been created somewhere else before
+# sem = Semaphore("/test", create = False)
+with sem.guard():
+    ... # critical section
+## or if you don't want to use "with" syntax
+# sem.wait()
+# try:
+#     ... # critical section
+# finally:
+#     sem.post()
+
+sem.close()
+sem.unlink() # if you want to delete the semaphore. 
+             # Don't do this if you are using it somewhere else.
+```

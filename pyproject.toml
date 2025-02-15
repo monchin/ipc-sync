@@ -27,6 +27,10 @@ classifiers = [
 Homepage = "https://github.com/monchin/ipc-utils"
 Repository = "https://github.com/monchin/ipc-utils"
 
+[dependency-groups]
+test = [
+    "pytest>=8.3.4",
+]
 
 [build-system]
 requires = ["pdm-backend"]
@@ -37,3 +41,4 @@ version = { source = "file", path = "src/ipc_utils/__init__.py" }
 
 [tool.pdm.scripts]
 fmt = {composite=["ruff check --select I --fix .", "ruff format ."]}
+test = "pytest tests"
