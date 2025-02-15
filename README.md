@@ -8,9 +8,9 @@ A named semaphore is offered.
 ```python
 from ipc_utils import Semaphore
 
-sem = Semaphore("/test", create = True, init_val = 1)
+sem = Semaphore("/test_sem", create = True, init_val = 1)
 ## or if it has been created somewhere else before
-# sem = Semaphore("/test", create = False)
+# sem = Semaphore("/test_sem", create = False)
 with sem.guard():
     ... # critical section
 ## or if you don't want to use "with" syntax
@@ -22,5 +22,26 @@ with sem.guard():
 
 sem.close()
 sem.unlink() # if you want to delete the semaphore. 
+             # Don't do this if you are using it somewhere else.
+```
+### Mutex
+A named mutex is offered.
+```python
+from ipc_utils import Mutex
+
+mtx = Mutex("/test_mtx", create = True)
+## or if it has been created somewhere else before
+# mtx = Mutex("/test_mtx", create = False)
+with mtx.guard():
+    ... # critical section
+## or if you don't want to use "with" syntax
+# mtx.acquire()
+# try:
+#     ... # critical section
+# finally:
+#     mtx.release()
+
+mtx.close()
+mtx.unlink() # if you want to delete the mutex. 
              # Don't do this if you are using it somewhere else.
 ```

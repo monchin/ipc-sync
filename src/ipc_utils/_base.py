@@ -30,3 +30,29 @@ class BaseSemaphore:
             yield
         finally:
             self.post()
+
+
+class BaseMutex:
+    def __init__(self, name: str):
+        self._mutex = None
+        self._name: Final = name
+
+    def acquire(self):
+        raise NotImplementedError
+
+    def release(self):
+        raise NotImplementedError
+
+    def close(self):
+        raise NotImplementedError
+
+    def unlink(self):
+        pass
+
+    @contextlib.contextmanager
+    def guard(self):
+        self.acquire()
+        try:
+            yield
+        finally:
+            self.release()

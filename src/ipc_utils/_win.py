@@ -5,7 +5,7 @@ from typing import Final
 import win32api
 import win32event
 
-from ._base import BaseSemaphore
+from ._base import BaseMutex, BaseSemaphore
 
 __all__ = ["Semaphore", "AccessRight"]
 
@@ -56,3 +56,29 @@ class Semaphore(BaseSemaphore):
     def close(self):
         if self._sem is not None:
             win32api.CloseHandle(self._sem)
+
+
+class Mutex(BaseMutex):
+    def __init__(
+        self, name: str, create: bool, mode: int = AccessRight.MUTEX_ALL_ACCESS
+    ):
+        super().__init__(name)
+
+        try:
+            if create:
+                self._mutex = win32event.CreateMutex(None, False, name)
+            else:
+                self._mutex = win32event.OpenMutex(mode, False, name)
+        except Exception as e:
+            self._mutex = None
+            raise e
+
+    def acquire(self):
+        win32event.WaitForSingleObject(self._mutex, win32event.INFINITE)
+
+    def release(self):
+        win32event.ReleaseMutex(self._mutex)
+
+    def close(self):
+        if self._mutex is not None:
+            win32api.CloseHandle(self._mutex)
