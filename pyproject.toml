@@ -13,7 +13,7 @@ dependencies = [
 license = {text = "MIT"}
 keywords = ["IPC", "cross-platform"]
 classifiers = [
-    "Topic :: IPC",
+    "Topic :: Utilities",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
@@ -31,6 +31,10 @@ Repository = "https://github.com/monchin/ipc-utils"
 test = [
     "pytest>=8.3.4",
 ]
+lint = [
+    "types-pywin32>=308.0.0.20241221; sys_platform == \"win32\"",
+    "mypy>=1.14.1",
+]
 
 [build-system]
 requires = ["pdm-backend"]
@@ -42,3 +46,29 @@ version = { source = "file", path = "src/ipc_utils/__init__.py" }
 [tool.pdm.scripts]
 fmt = {composite=["ruff check --select I --fix .", "ruff format ."]}
 test = "pytest tests"
+
+
+[tool.ruff.lint]
+# See list of rules at: https://docs.astral.sh/ruff/rules/
+select = [
+    "E",  # pycodestyle errors
+    "W",  # pycodestyle warnings
+    "F",  # pyflakes
+    "I",  # isort
+    "B",  # flake8-bugbear
+    "C4",  # flake8-comprehensions
+    "UP",  # pyupgrade
+]
+
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.lint.pycodestyle]
+max-doc-length = 100
+
+[tool.ruff.lint.pydocstyle]
+convention = "numpy"
+
+[tool.ruff.lint.pyupgrade]
+# Preserve types, even if a file imports `from __future__ import annotations`.
+keep-runtime-typing = true

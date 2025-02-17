@@ -7,7 +7,7 @@ import win32event
 
 from ._base import BaseMutex, BaseSemaphore
 
-__all__ = ["Semaphore", "AccessRight"]
+__all__ = ["AccessRight", "Semaphore"]
 
 
 class AccessRight:
@@ -39,9 +39,9 @@ class Semaphore(BaseSemaphore):
 
         try:
             if create:
-                self._sem = win32event.CreateSemaphore(None, init_val, init_val, name)
+                self._sem = win32event.CreateSemaphore(None, init_val, init_val, name) # type: ignore
             else:
-                self._sem = win32event.OpenSemaphore(mode, False, name)
+                self._sem = win32event.OpenSemaphore(mode, False, name) # type: ignore
 
         except Exception as e:
             self._sem = None
@@ -66,9 +66,9 @@ class Mutex(BaseMutex):
 
         try:
             if create:
-                self._mutex = win32event.CreateMutex(None, False, name)
+                self._mutex = win32event.CreateMutex(None, False, name) # type: ignore
             else:
-                self._mutex = win32event.OpenMutex(mode, False, name)
+                self._mutex = win32event.OpenMutex(mode, False, name)  # type: ignore
         except Exception as e:
             self._mutex = None
             raise e

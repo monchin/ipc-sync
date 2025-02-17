@@ -3,19 +3,19 @@ from __future__ import annotations
 import ctypes
 import multiprocessing as mp
 from multiprocessing.sharedctypes import RawArray
-from typing import Literal, MutableSequence
+from typing import Literal, MutableSequence, Union
 
-import pytest
+import pytest  # type: ignore
 
 from ipc_utils import SYS, Mutex, Semaphore
 
 if SYS == "nt":
     import pywintypes
 
-    PlatFormError = pywintypes.error
+    PlatFormError = pywintypes.error # type: ignore
 
 elif SYS == "posix":
-    PlatFormError = OSError
+    PlatFormError = OSError # type: ignore
 
 
 def test_open_non_existing():
@@ -28,6 +28,7 @@ def test_open_non_existing():
 
 def kernel(int_buf: MutableSequence[int], mode: Literal["mutex", "semaphore"]):
     obj_name = f"/test_{mode}"
+    obj: Union[Semaphore, Mutex]
     if mode == "mutex":
         obj = Mutex(obj_name, False)
     elif mode == "semaphore":
@@ -40,6 +41,7 @@ def kernel(int_buf: MutableSequence[int], mode: Literal["mutex", "semaphore"]):
 
 def body_for_test(mode: Literal["mutex", "semaphore"]):
     obj_name = f"/test_{mode}"
+    obj: Union[Semaphore, Mutex]
     if mode == "mutex":
         obj = Mutex(obj_name, True)
     elif mode == "semaphore":

@@ -24,8 +24,21 @@ sem.close()
 sem.unlink() # if you want to delete the semaphore. 
              # Don't do this if you are using it somewhere else.
 ```
+Once you created a named semaphore, you can use it in c/cpp like
+```c
+#ifdef _WIN32
+#define Semaphore HANDLE
+Semaphore sem = OpenSemaphore(SEMAPHORE_ALL_ACCESS, FALSE, "/test_sem");
+#else
+#include <semaphore.h>
+#define Semaphore sem_t
+Semaphore sem = sem_open("/test_sem", 0);
+#endif
+```
 ### Mutex
 A named mutex is offered.
+
+Note that as posix does not offer named mutex, we use named semaphore with init_val 1 instead.
 ```python
 from ipc_utils import Mutex
 
