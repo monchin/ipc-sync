@@ -7,7 +7,7 @@ from typing import Literal, MutableSequence, Union
 
 import pytest  # type: ignore
 
-from ipc_utils import SYS, Mutex, Semaphore
+from ipc_sync import SYS, Mutex, Semaphore
 
 if SYS == "nt":
     import pywintypes

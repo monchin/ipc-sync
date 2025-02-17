@@ -1,7 +1,7 @@
 [project]
-name = "ipc-utils"
+name = "ipc-sync"
 dynamic = ["version"]
-description = "Cross-platform utils for IPC (inter-processing communication) in Python"
+description = "Cross-platform utils for IPC (inter-processing communication) synchronization in Python"
 readme = "README.md"
 authors = [
     { name = "monchin", email = "pazzinter@126.com" }
@@ -24,8 +24,8 @@ classifiers = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/monchin/ipc-utils"
-Repository = "https://github.com/monchin/ipc-utils"
+Homepage = "https://github.com/monchin/ipc-sync"
+Repository = "https://github.com/monchin/ipc-sync"
 
 [dependency-groups]
 test = [
@@ -41,7 +41,7 @@ requires = ["pdm-backend"]
 build-backend = "pdm.backend"
 
 [tool.pdm]
-version = { source = "file", path = "src/ipc_utils/__init__.py" }
+version = { source = "file", path = "src/ipc_sync/__init__.py" }
 
 [tool.pdm.scripts]
 fmt = {composite=["ruff check --select I --fix .", "ruff format ."]}
