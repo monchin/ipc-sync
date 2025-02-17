@@ -25,9 +25,7 @@ class Semaphore(BaseSemaphore):
                 self._name.encode("utf-8"), os.O_CREAT | os.O_EXCL, mode, init_val
             )
         else:
-            self._sem = libc.sem_open(
-                self._name.encode("utf-8"), os.O_RDWR, mode, init_val
-            )
+            self._sem = libc.sem_open(self._name.encode("utf-8"), os.O_RDWR, mode, init_val)
 
         if self._sem is None:
             raise OSError(

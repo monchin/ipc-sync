@@ -39,9 +39,9 @@ class Semaphore(BaseSemaphore):
 
         try:
             if create:
-                self._sem = win32event.CreateSemaphore(None, init_val, init_val, name) # type: ignore
+                self._sem = win32event.CreateSemaphore(None, init_val, init_val, name)  # type: ignore
             else:
-                self._sem = win32event.OpenSemaphore(mode, False, name) # type: ignore
+                self._sem = win32event.OpenSemaphore(mode, False, name)  # type: ignore
 
         except Exception as e:
             self._sem = None
@@ -59,14 +59,12 @@ class Semaphore(BaseSemaphore):
 
 
 class Mutex(BaseMutex):
-    def __init__(
-        self, name: str, create: bool, mode: int = AccessRight.MUTEX_ALL_ACCESS
-    ):
+    def __init__(self, name: str, create: bool, mode: int = AccessRight.MUTEX_ALL_ACCESS):
         super().__init__(name)
 
         try:
             if create:
-                self._mutex = win32event.CreateMutex(None, False, name) # type: ignore
+                self._mutex = win32event.CreateMutex(None, False, name)  # type: ignore
             else:
                 self._mutex = win32event.OpenMutex(mode, False, name)  # type: ignore
         except Exception as e:

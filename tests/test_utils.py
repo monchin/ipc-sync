@@ -12,10 +12,10 @@ from ipc_utils import SYS, Mutex, Semaphore
 if SYS == "nt":
     import pywintypes
 
-    PlatFormError = pywintypes.error # type: ignore
+    PlatFormError = pywintypes.error  # type: ignore
 
 elif SYS == "posix":
-    PlatFormError = OSError # type: ignore
+    PlatFormError = OSError  # type: ignore
 
 
 def test_open_non_existing():
