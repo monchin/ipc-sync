@@ -1,4 +1,4 @@
-# ipc-utils
+# ipc-sync
 Cross-platform utils for IPC (inter-processing communication) in Python
 
 You can create a named IPC tool like semaphore or mutex here. Onced you created here, you can use it everywhere in your computer. You can also just open a named IPC tool and use it if it has been created somewhere else before.
