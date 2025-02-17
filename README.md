@@ -2,11 +2,15 @@
 Cross-platform utils for IPC (inter-processing communication) in Python
 
 You can create a named IPC tool like semaphore or mutex here. Onced you created here, you can use it everywhere in your computer. You can also just open a named IPC tool and use it if it has been created somewhere else before.
+## Installation
+```bash
+pip install ipc-sync
+```
 ## Usage
 ### Semaphore
 A named semaphore is offered.
 ```python
-from ipc_utils import Semaphore
+from ipc_sync import Semaphore
 
 sem = Semaphore("/test_sem", create = True, init_val = 1)
 ## or if it has been created somewhere else before
@@ -40,7 +44,7 @@ A named mutex is offered.
 
 Note that as posix does not offer named mutex, we use named semaphore with init_val 1 instead.
 ```python
-from ipc_utils import Mutex
+from ipc_sync import Mutex
 
 mtx = Mutex("/test_mtx", create = True)
 ## or if it has been created somewhere else before
